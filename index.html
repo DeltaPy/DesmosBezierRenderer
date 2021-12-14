@@ -102,12 +102,12 @@
             imgcont.innerHTML = `<img src= ${screenshot}>`;
             if (download_images) imgcont.click();
 
-            // Reloading the page every so often seems to reduce random slowdowns
-            if (frame >= loaded_frames) {
-                sessionStorage.setItem('lastFrame', frame);
-                sessionStorage.setItem('viewport', JSON.stringify(calculator.getState().graph.viewport));
-                location.reload();
-            } else renderFrame(frame);
+            // // Reloading the page every so often seems to reduce random slowdowns
+            // if (frame >= loaded_frames) {
+            //     sessionStorage.setItem('lastFrame', frame);
+            //     sessionStorage.setItem('viewport', JSON.stringify(calculator.getState().graph.viewport));
+            //     location.reload();
+            // } else renderFrame(frame);
         }
    </script>
 </html>

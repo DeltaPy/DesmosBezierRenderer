@@ -7,6 +7,7 @@ from PIL import Image
 import numpy as np
 import potrace
 import cv2
+from time import time, sleep
 
 import multiprocessing
 from time import time
@@ -36,7 +37,7 @@ SHOW_GRID = True # Show the grid in the background while rendering
 frame = multiprocessing.Value('i', 0)
 height = multiprocessing.Value('i', 0, lock = False)
 width = multiprocessing.Value('i', 0, lock = False)
-frame_latex = 0
+frame_latex =  range(len(os.listdir(FRAME_DIR)))
 
 
 def help():
@@ -117,7 +118,8 @@ def get_expressions(frame):
     exprs = []
     for expr in get_latex(FRAME_DIR + '/frame%d.%s' % (frame+1, FILE_EXT)):
         exprid += 1
-        exprs.append({'id': 'expr-' + str(exprid), 'latex': expr, 'color': COLOUR, 'secret': True})
+        exprs.append({'id': 'expr-' + str(exprid), 'latex': expr, 'color': COLOUR, 'secret': False})
+    # print (exprs)
     return exprs
 
 
@@ -186,7 +188,6 @@ if __name__ == '__main__':
                 BLOCK_SIZE = int(arg)
             elif opt == '--maxpblock':
                 MAX_EXPR_PER_BLOCK = int(arg)
-        frame_latex =  range(len(os.listdir(FRAME_DIR)))
 
     except TypeError:
         print('Error: Invalid argument(s)\n')
